@@ -2,7 +2,8 @@
 RxSwift + APIKit + Codable MVVM Sample
 
 ## Getting Started
-
+RANDOM USER GENERATOR
+https://randomuser.me/
 
 ### Prerequisites
 
