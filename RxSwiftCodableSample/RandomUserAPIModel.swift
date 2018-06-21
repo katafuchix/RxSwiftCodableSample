@@ -32,10 +32,24 @@ struct Person: Codable  {
         let street: String
         let city: String
         let state: String
-        let postcode: Int
+        let postcode: String
+
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            street   = try container.decode(String.self, forKey: .street)
+            city     = try container.decode(String.self, forKey: .city)
+            state    = try container.decode(String.self, forKey: .state)
+            // postcodeはSting/Intのどちらかでくる Expected to decode Int but found a string/data instead. 対策
+            if let value = try? container.decode(Int.self, forKey: .postcode) {
+                postcode = String(value)
+            } else {
+                postcode = try container.decode(String.self, forKey: .postcode)
+            }
+        }
     }
 
     let email: String
+
 }
 
 // RandomUser APIへのリクエスト定義
